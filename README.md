@@ -1,6 +1,8 @@
 # robosys2017_led_device_driver
-LED Device Driver for RaspberryPi3
+LED Device Driver for RaspberryPi3.
+
 The LED gradually brightens in 1 second, gradually darkens in 1 second and disappears.
+
 Repeat the above 10 times.
 
 ## movie
