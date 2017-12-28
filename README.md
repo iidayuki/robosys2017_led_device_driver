@@ -35,4 +35,4 @@ Execute the following command.
     ./myled.sh
 
 ## License
-This repository is licensed under the GPLv3 license, see [LICENSE](/robosys2017_led_device_driver/LICENS).
+This repository is licensed under the GPLv3 license, see [LICENSE](https://github.com/iidayuki/robosys2017_led_device_driver/blob/master/LICENSE).
