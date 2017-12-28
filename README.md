@@ -14,7 +14,7 @@ This package requires the following to run:
   * kernel build scripts : https://github.com/ryuichiueda/raspberry_pi_kernel_build_scripts
 * led
 * resistor
- * 1kΩ
+  * 1kΩ
 
 
 ## Installation
