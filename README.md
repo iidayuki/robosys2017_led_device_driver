@@ -14,13 +14,13 @@ This package requires the following to run:
   * kernel build scripts : https://github.com/ryuichiueda/raspberry_pi_kernel_build_scripts
 * led
 * resistor
-  * 1kΩ
+ * 1kΩ
 
 
 ## Installation
 First, download this repository.
 
-    git clone https://github.com/iidayuki/robosys2017_led_device_driver.git
+    git clone https://github.com/iidayuki/robosys2017_led_device_driver.git
 
 Next, move into robosys2017_led_device_driver directory and  execute the following command
 
