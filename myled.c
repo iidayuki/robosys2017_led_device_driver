@@ -6,6 +6,8 @@
 #include <linux/io.h>
 #include <asm/delay.h>
 
+#define time_count 1000
+
 MODULE_AUTHOR("Yuki Iida");
 MODULE_DESCRIPTION("driver for LED control");
 MODULE_LICENSE("GPL");
@@ -29,17 +31,17 @@ static ssize_t led_write(struct file* filp, const char* buf, size_t count, loff_
 	else if(c == '1')
 		gpio_base[7] = 1 << 25;
 	else if(c == '2'){
-		for(time_sleep=0;time_sleep<2000;time_sleep++){
-			gpio_base[7]=1<<25;
-			udelay(time_sleep);
-			gpio_base[10]=1<<25;
-			udelay(2000-time_sleep);
+		for(time_sleep=0; time_sleep<time_count; time_sleep++){
+			gpio_base[7] = 1 << 25;
+			udelay( time_sleep );
+			gpio_base[10] = 1 << 25;
+			udelay( time_count - time_sleep );
 		}
-		for(time_sleep=0;time_sleep<2000;time_sleep++){
-			gpio_base[7]=1<<25;
-			udelay(2000-time_sleep);
-			gpio_base[10]=1<<25;
-			udelay(time_sleep);
+		for(time_sleep=0; time_sleep<time_count; time_sleep++){
+			gpio_base[7]= 1 << 25;
+			udelay( time_count - time_sleep );
+			gpio_base[10]= 1 << 25;
+			udelay( time_sleep );
 		}
 	}
         return 1;
@@ -53,15 +55,14 @@ static struct file_operations led_fops = {
 static int __init init_mod(void)
 {
 	int retval;
-
-	gpio_base = ioremap_nocache(0x3f200000, 0xA0); //0x3f..:base address, 0xA0: region to map
+	gpio_base = ioremap_nocache(0x3f200000, 0xA0);
 
 	const u32 led = 25;
-	const u32 index = led/10;//GPFSEL2
-	const u32 shift = (led%10)*3;//15bit
+	const u32 index = led/10;
+	const u32 shift = (led%10)*3;
 	const u32 mask = ~(0x7 << shift);
-	gpio_base[index] = (gpio_base[index] & mask) | (0x1 << shift);//001: output flag
-  
+	gpio_base[index] = (gpio_base[index] & mask) | (0x1 << shift);
+
 	retval =  alloc_chrdev_region(&dev, 0, 1, "myled");
 	if(retval < 0){
 		printk(KERN_ERR "alloc_chrdev_region failed.\n");
